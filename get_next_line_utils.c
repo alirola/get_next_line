@@ -6,37 +6,38 @@
 /*   By: alirola- <alirola-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:41:43 by alirola-          #+#    #+#             */
-/*   Updated: 2023/05/30 18:34:14 by alirola-         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:47:28 by alirola-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*ret_str;
-	size_t	len;
+	size_t	s1_len;
+	char	*result;
 	int		i;
-	int		a;
 
-	i = 0;
-	a = 0;
-	len = ((size_t)ft_strlen(s1) + (size_t)ft_strlen(s2));
-	ret_str = (char *)malloc(((len + 1) * sizeof(char)));
-	if (!ret_str)
-		return (NULL);
-	while (s1[i])
+	if (!s1)
 	{
-		ret_str[i] = s1[i];
-		i++;
+		s1 = ft_calloc(1, sizeof(char));
+		if (!s1)
+			return (free(s1), s1 = NULL, NULL);
 	}
-	while (s2[a])
-	{
-		ret_str[i + a] = s2[a];
-		a++;
-	}
-	ret_str[i + a] = '\0';
-	return (ret_str);
+	if (!s2)
+		return (free(s1), s1 = NULL, NULL);
+	s1_len = ft_strlen(s1);
+	result = (char *)ft_calloc((s1_len + ft_strlen(s2) + 1), sizeof(char));
+	if (!result)
+		return (free(s1), s1 = NULL, NULL);
+	i = -1;
+	while (s1[++i])
+		result[i] = s1[i];
+	i = -1;
+	while (s2[++i])
+		result[s1_len + i] = s2[i];
+	result[s1_len + i] = '\0';
+	return (free(s1), s1 = NULL, result);
 }
 
 void	ft_bezero_full(void *s, size_t n)
@@ -66,7 +67,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 int	ft_strlen(const char *str)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (str[i] != '\0')
