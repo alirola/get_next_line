@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:54:09 by alirola-          #+#    #+#             */
-/*   Updated: 2023/07/06 14:52:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/06 20:28:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,10 @@ char	*get_next_line(int fd)
 		return (free(str), str = NULL, NULL);
 	str = clean_buffer(str);
 	if (!str)
-		return (free(str), str = NULL, NULL);
+		return (free(str), str = NULL, actual_line);
 	return (actual_line);
 }
-
+/*
 int main(void)
 {
 	int fichero;
@@ -142,4 +142,4 @@ int main(void)
 	printf("\n");
 	close(fichero);
 	free(line);
-}
+}*/
