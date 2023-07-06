@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alirola- <alirola-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:37:45 by alirola-          #+#    #+#             */
-/*   Updated: 2023/06/21 14:47:17 by alirola-         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:24:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_calloc(size_t num, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
+void	*ft_calloc(size_t count, size_t size);
 int		ft_strlen(const char *str);
-int		ft_strchr(char *str, int c);
+int		ft_strchr_mod(char *s, int c);
+void	ft_bezero_full(void *s, size_t n);
 
 #endif
