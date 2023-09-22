@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alirola- <alirola-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:54:09 by alirola-          #+#    #+#             */
-/*   Updated: 2023/07/06 20:28:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/22 19:21:03 by alirola-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static char	*get_actual_line(char *str)
 		return (NULL);
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	str_res = ft_calloc((i + 1 + (str[i] == '\n')), sizeof(char));
+	if (str[i] == '\n')
+		i++;
+	str_res = ft_calloc((i + 1), sizeof(char));
 	if (!str_res)
 		return (NULL);
 	i = 0;
@@ -127,10 +129,10 @@ char	*get_next_line(int fd)
 	return (actual_line);
 }
 /*
-int main(void)
+int	main(void)
 {
-	int fichero;
-	char *line;
+	int		fichero;
+	char	*line;
 
 	fichero = open("test.txt", O_RDONLY);
 	line = get_next_line(fichero);
@@ -142,4 +144,5 @@ int main(void)
 	printf("\n");
 	close(fichero);
 	free(line);
-}*/
+}
+*/
