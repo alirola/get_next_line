@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alirola- <alirola-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 16:54:09 by alirola-          #+#    #+#             */
-/*   Updated: 2023/09/27 13:16:56 by alirola-         ###   ########.fr       */
+/*   Created: 2023/09/28 12:48:01 by alirola-          #+#    #+#             */
+/*   Updated: 2023/09/28 13:12:43 by alirola-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -103,46 +103,69 @@ static char	*read_fd(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char		*str;
+	static char		*str[1024];
 	char			*actual_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, 0, 0) < 0)
 	{
-		if (str != NULL)
+		if (str[fd] != NULL)
 		{
 			free(str);
-			str = NULL;
+			str[fd] = NULL;
 		}
 		return (NULL);
 	}
-	str = read_fd(fd, str);
-	if (!str)
-		return (free(str), str = NULL, NULL);
-	actual_line = get_actual_line(str);
+	str[fd] = read_fd(fd, str[fd]);
+	if (!str[fd])
+		return (free(str[fd]), str[fd] = NULL, NULL);
+	actual_line = get_actual_line(str[fd]);
 	if (!actual_line)
-		return (free(str), str = NULL, NULL);
-	str = clean_buffer(str);
-	if (!str)
-		return (free(str), str = NULL, actual_line);
+		return (free(str[fd]), str[fd] = NULL, NULL);
+	str[fd] = clean_buffer (str[fd]);
+	if (!str[fd])
+		return (free(str[fd]), str[fd] = NULL, actual_line);
 	return (actual_line);
 }
 /*
-int	main(void)
+int main ()
 {
-	int		fichero;
-	char	*line;
+	int fichero;
+	int	fichero2;
+	int	fichero3;
+	char *linef1;
+	char *linef2;
+	char *linef3;	
 
 	fichero = open("test.txt", O_RDONLY);
-	line = get_next_line(fichero);
-	while (line != NULL)
+	fichero2 = open("test2", 0);
+	fichero3 = open("vacio", 0);
+	linef1 = get_next_line(fichero);
+	while (linef1 != NULL)
 	{
-		printf("%s", line);
-		line = get_next_line (fichero);
+		printf("%s", linef1);
+		linef1 = get_next_line(fichero);
 	}
 	printf("\n");
+	linef2 = get_next_line(fichero2);
+	while (linef2 != NULL)
+	{
+		printf("%s", linef2);
+		linef2 = get_next_line(fichero2);
+	}
+	printf("\n");
+	linef3 = get_next_line(fichero3);
+	while (linef3 != NULL)
+	{
+		printf("%s", linef3);
+		linef3 = get_next_line(fichero3);
+	}
 	close(fichero);
-	free(line);
+	close(fichero2);
+	close(fichero3);
+	free(linef1);
+	free(linef2);
+	free(linef3);
 }
 */
