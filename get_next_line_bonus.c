@@ -6,7 +6,7 @@
 /*   By: alirola- <alirola-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:48:01 by alirola-          #+#    #+#             */
-/*   Updated: 2023/09/28 13:12:43 by alirola-         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:40:08 by alirola-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	{
 		if (str[fd] != NULL)
 		{
-			free(str);
+			free(str[fd]);
 			str[fd] = NULL;
 		}
 		return (NULL);
@@ -139,7 +139,7 @@ int main ()
 	char *linef3;	
 
 	fichero = open("test.txt", O_RDONLY);
-	fichero2 = open("test2", 0);
+	fichero2 = open("test2.txt", 0);
 	fichero3 = open("vacio", 0);
 	linef1 = get_next_line(fichero);
 	while (linef1 != NULL)
